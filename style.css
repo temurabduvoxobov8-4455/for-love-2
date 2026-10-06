@@ -1,0 +1,109 @@
+:root{
+  --main:#b01e4c;
+  --accent:#e8456f;
+  --text:#4a1a2a;
+  --soft:#5a2a3a;
+  color-scheme:light;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:linear-gradient(180deg,#fff0f3 0%,#ffd6e0 100%);
+  background-attachment:fixed;
+  color:var(--text);
+  font-family:'Lora',Georgia,'Apple Color Emoji','Segoe UI Emoji',serif;
+  text-align:center;
+}
+
+/* floating hearts */
+.hearts{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.heart{position:absolute;bottom:-40px;opacity:.3;animation:rise linear infinite}
+@keyframes rise{to{transform:translateY(-115vh) rotate(25deg);opacity:0}}
+
+/* layout */
+section{
+  position:relative;z-index:1;min-height:100vh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:64px 24px;box-sizing:border-box;
+}
+.inner{max-width:580px}
+
+/* big emoji */
+.big{font-size:84px;line-height:1;display:inline-block;animation:beat 1.4s ease-in-out infinite}
+@keyframes beat{0%,100%{transform:scale(1)}15%{transform:scale(1.18)}30%{transform:scale(1)}45%{transform:scale(1.12)}}
+
+/* text */
+h1,h2{
+  font-family:'Playfair Display',Georgia,serif;
+  font-style:italic;font-weight:900;
+  color:var(--main);margin:12px 0 18px;
+}
+h1{font-size:clamp(38px,9vw,68px)}
+h2{font-size:clamp(30px,7vw,48px)}
+p{font-size:18px;line-height:1.75;margin:0 0 20px;color:var(--soft)}
+
+/* message box */
+.letter{
+  background:rgba(255,255,255,.7);
+  border:1px solid #f0a3b8;
+  border-radius:18px;padding:32px 28px;text-align:left;
+}
+.letter p:last-child{margin:0;text-align:right;font-style:italic;color:var(--main)}
+
+/* list */
+.reasons{list-style:none;padding:0;margin:0;display:grid;gap:14px}
+.reasons li{
+  background:#fff;border-left:4px solid var(--accent);
+  padding:16px 20px;border-radius:10px;text-align:left;
+  font-size:18px;line-height:1.5;color:var(--text);
+  box-shadow:0 2px 8px rgba(176,30,76,.1);
+}
+
+/* timeline */
+.timeline{border-left:2px solid var(--accent);margin:0 0 0 12px;padding:0 0 0 26px;text-align:left}
+.timeline div{position:relative;margin-bottom:30px}
+.timeline div::before{
+  content:"??";position:absolute;left:-39px;top:-2px;
+  background:#ffe3ea;font-size:18px;
+}
+.timeline b{
+  font-family:'Playfair Display',serif;font-style:italic;
+  font-size:22px;color:var(--main);display:block;margin-bottom:4px;
+}
+.timeline span{font-size:17px;line-height:1.6;color:var(--soft)}
+
+.scroll{margin-top:30px;color:var(--main);font-size:15px;animation:bob 2s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(8px)}}
+
+/* buttons */
+.buttons{display:flex;gap:20px;justify-content:center;align-items:center;min-height:64px;margin-top:30px}
+button{
+  font-family:'Playfair Display',Georgia,serif;font-style:italic;font-weight:700;
+  font-size:22px;padding:14px 38px;border-radius:999px;border:0;cursor:pointer;
+}
+button:focus-visible{outline:3px solid #f3c77a;outline-offset:3px}
+#yes{background:#c81d4e;color:#fff;box-shadow:0 8px 24px rgba(200,29,78,.5);transition:transform .2s}
+#yes:hover{transform:scale(1.08)}
+#no{
+  background:#fff;color:var(--main);
+  box-shadow:0 4px 14px rgba(176,30,76,.2);
+  transition:left .25s ease,top .25s ease;z-index:3;
+}
+
+/* message after clicking Yes */
+#msg{
+  position:fixed;inset:0;display:none;
+  align-items:center;justify-content:center;flex-direction:column;
+  background:linear-gradient(180deg,#fff0f3,#ffc2d1);
+  z-index:10;padding:24px;
+}
+#msg.show{display:flex}
+#msg h2{font-size:clamp(36px,9vw,68px)}
+
+@media (prefers-reduced-motion:reduce){
+  .heart,.big,.scroll{animation:none}
+  html{scroll-behavior:auto}
+}
